@@ -1,0 +1,4 @@
+node {
+  stage 'Run JMeter Test'
+  C:\jmeter\bin\jmeter.bat -Jjmeter.save.saveservice.output_format=json -Jjmeter.save.saveservice.response_data=true -n -t C:\jmeter\extras\pihmacs_qa.jmx -l Test.jtl
+}
