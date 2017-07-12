@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="2.8" jmeter="2.13 r1665067">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="Test Plan" enabled="true">
+      <stringProp name="TestPlan.comments"></stringProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <stringProp name="TestPlan.user_define_classpath"></stringProp>
+    </TestPlan>
+    <hashTree>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="pihmacs" enabled="true">
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller" enabled="true">
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+          <stringProp name="LoopController.loops">1</stringProp>
+        </elementProp>
+        <stringProp name="ThreadGroup.num_threads">1</stringProp>
+        <stringProp name="ThreadGroup.ramp_time">1</stringProp>
+        <longProp name="ThreadGroup.start_time">1499702289000</longProp>
+        <longProp name="ThreadGroup.end_time">1499702289000</longProp>
+        <boolProp name="ThreadGroup.scheduler">false</boolProp>
+        <stringProp name="ThreadGroup.duration"></stringProp>
+        <stringProp name="ThreadGroup.delay"></stringProp>
+      </ThreadGroup>
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="piauth_HTTP Request" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">password=Test1234&amp;username=TestUser&amp;resource_name=pi&amp;grant_type=password&amp;client_secret=3234af780a08bff5e73ac636100d60206d7b27fee442b211b725b86028efb148&amp;client_id=1888cf024fedfdf36a8454b9d0416a9bab258934b8db26a45e0b0b77bd2f9e98</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">http://10.100.10.177:53601/oauth/token</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <RegexExtractor guiclass="RegexExtractorGui" testclass="RegexExtractor" testname="Regular Expression Extractor" enabled="true">
+            <stringProp name="RegexExtractor.useHeaders">false</stringProp>
+            <stringProp name="RegexExtractor.refname">token</stringProp>
+            <stringProp name="RegexExtractor.regex">&quot;access_token&quot;:&quot;(.+?)&quot;</stringProp>
+            <stringProp name="RegexExtractor.template">$1$</stringProp>
+            <stringProp name="RegexExtractor.default"></stringProp>
+            <stringProp name="RegexExtractor.match_number">1</stringProp>
+          </RegexExtractor>
+          <hashTree/>
+          <com.atlantbh.jmeter.plugins.jsonutils.jsonformatter.JSONFormatter guiclass="com.atlantbh.jmeter.plugins.jsonutils.jsonformatter.gui.JSONFormatterGui" testclass="com.atlantbh.jmeter.plugins.jsonutils.jsonformatter.JSONFormatter" testname="jp@gc - JSON Format Post Processor" enabled="true"/>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="send_drugfill_HTTP Request" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+&quot;requestInfo&quot;: {&#xd;
+&quot;partnerName&quot;: &quot;affiliate A&quot;,&#xd;
+&quot;sendingNode&quot;: &quot;manual&quot;,&#xd;
+&quot;requestID&quot;: &quot;ac78064f4944273025d860e4721bce131795c574b41885ff4b87d34b587b3dae&quot;,&#xd;
+&quot;timeStamp&quot;: &quot;&quot;&#xd;
+},&#xd;
+&quot;drugFills&quot;: [&#xd;
+{&#xd;
+&quot;brandName&quot;: &quot;Abilify&quot;,&#xd;
+&quot;genericName&quot;: &quot;aripiprazole&quot;,&#xd;
+&quot;quantity&quot;: &quot;30&quot;,&#xd;
+&quot;drugName&quot;: &quot;Abilify&quot;,&#xd;
+&quot;drugStrengthUnitCode&quot;: &quot;101&quot;,&#xd;
+&quot;fillType&quot;: &quot;Full fill&quot;,&#xd;
+&quot;formCode&quot;: &quot;IV&quot;,&#xd;
+&quot;payorName&quot;: &quot;payor&quot;,&#xd;
+&quot;payorNumber&quot;: &quot;payor101&quot;,&#xd;
+&quot;pharmacistNotes&quot;: &quot;payor101&quot;,&#xd;
+&quot;quantityUnitCode&quot;: &quot;101&quot;,&#xd;
+&quot;refillsOriginal&quot;: &quot;2&quot;,&#xd;
+&quot;refillsRemaining&quot;: &quot;1&quot;,&#xd;
+&quot;refillsRequested&quot;: &quot;-1&quot;,&#xd;
+&quot;fillSource&quot;: &quot;test&quot;,&#xd;
+&quot;drugStrengthNum&quot;: &quot;5&quot;,&#xd;
+&quot;fillDate&quot;: &quot;${__time(YMD)}&quot;,&#xd;
+&quot;ndcId&quot;: &quot;123456789&quot;,&#xd;
+&quot;daysSupply&quot;: &quot;30&quot;,&#xd;
+&quot;patient&quot;: {&#xd;
+&quot;patientId&quot;: &quot;888555.qa.faisal@drfirst.com&quot;,&#xd;
+&quot;firstName&quot;: &quot;morgan&quot;,&#xd;
+&quot;lastName&quot;: &quot;freeman&quot;,&#xd;
+&quot;dateOfBirth&quot;: &quot;19450201&quot;,&#xd;
+&quot;middleName&quot;: &quot;......&quot;,&#xd;
+&quot;suffix&quot;: &quot;DR&quot;,&#xd;
+&quot;prefix&quot;: &quot;MS.&quot;,&#xd;
+&quot;gender&quot;: &quot;M&quot;,&#xd;
+&quot;address&quot;: {&#xd;
+&quot;zipCode&quot;: &quot;88436&quot;&#xd;
+}&#xd;
+},&#xd;
+&quot;pharmacy&quot;: {&#xd;
+&quot;ncpdpId&quot;: &quot;2377023&quot;,&#xd;
+&quot;name&quot;: &quot;Big House Pharmacy&quot;,&#xd;
+&quot;phoneNumber&quot;: &quot;(734) 929-2425&quot;,&#xd;
+&quot;address&quot;: {&#xd;
+&quot;address1&quot;: &quot;1000 E. Stadium Blvd Ste B&quot;,&#xd;
+&quot;address2&quot;: &quot;999999&quot;,&#xd;
+&quot;city&quot;: &quot;ANN ARBOR&quot;,&#xd;
+&quot;stateCode&quot;: &quot;MI&quot;,&#xd;
+&quot;zipCode&quot;: &quot;48104&quot;&#xd;
+}&#xd;
+},&#xd;
+&quot;prescriber&quot;: {&#xd;
+&quot;npi&quot;: &quot;1831120351&quot;,&#xd;
+&quot;firstName&quot;: &quot;Ana&quot;,&#xd;
+&quot;lastName&quot;: &quot;Herrero&quot;,&#xd;
+&quot;middleName&quot;: &quot;.....&quot;,&#xd;
+&quot;dea&quot;: &quot;dea&quot;,&#xd;
+&quot;clinicName&quot;: &quot;aplollo&quot;,&#xd;
+&quot;address&quot;: {&#xd;
+&quot;address1&quot;: &quot;1234, Phase 7&quot;,&#xd;
+&quot;address2&quot;: &quot;Sec 61&quot;,&#xd;
+&quot;city&quot;: &quot;Mohali&quot;,&#xd;
+&quot;stateCode&quot;: &quot;MD&quot;,&#xd;
+&quot;zipCode&quot;: &quot;12345&quot;&#xd;
+}&#xd;
+}&#xd;
+}&#xd;
+]&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">https://medhxservice.qa.drfirst.com/rest/sendDrugFillHistory.do</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="-1843932354"> &quot;message&quot;: &quot;Success&quot;</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">16</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Bearer ${token}</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <com.atlantbh.jmeter.plugins.jsonutils.jsonformatter.JSONFormatter guiclass="com.atlantbh.jmeter.plugins.jsonutils.jsonformatter.gui.JSONFormatterGui" testclass="com.atlantbh.jmeter.plugins.jsonutils.jsonformatter.JSONFormatter" testname="jp@gc - JSON Format Post Processor" enabled="true"/>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="get_drugfill_HTTP Request" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+   &quot;requestInfo&quot;:{&#xd;
+      &quot;partnerName&quot;:&quot;affiliate A&quot;,&#xd;
+      &quot;sendingNode&quot;:&quot;manual&quot;,&#xd;
+      &quot;requestID&quot;:&quot;c530e8908719478681352871f7f8ea84&quot;&#xd;
+   },&#xd;
+   &quot;patient&quot;:{&#xd;
+      &quot;firstName&quot;:&quot;morgan&quot;,&#xd;
+      &quot;lastName&quot;:&quot;freeman&quot;,&#xd;
+      &quot;dateOfBirth&quot;:&quot;19450201&quot;,&#xd;
+      &quot;gender&quot;:&quot;M&quot;,&#xd;
+      &quot;address&quot;:{&#xd;
+         &quot;zipCode&quot;:&quot;88436&quot;&#xd;
+      }&#xd;
+   },&#xd;
+   &quot;beginDate&quot;:&quot;${__time(YMD)}&quot;,&#xd;
+   &quot;endDate&quot;:&quot;${__time(YMD)}&quot;&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">https://medhxservice.qa.drfirst.com/rest/getDrugFillHistory.do</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <com.atlantbh.jmeter.plugins.jsonutils.jsonformatter.JSONFormatter guiclass="com.atlantbh.jmeter.plugins.jsonutils.jsonformatter.gui.JSONFormatterGui" testclass="com.atlantbh.jmeter.plugins.jsonutils.jsonformatter.JSONFormatter" testname="jp@gc - JSON Format Post Processor" enabled="true"/>
+          <hashTree/>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Basic VGVzdFVzZXI6VGVzdDEyMzQ=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="1768835345">&quot;drugName&quot;: &quot;Abilify&quot;</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">16</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="send_prescription_HTTP Request" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+&quot;requestInfo&quot;: {&#xd;
+&quot;partnerName&quot;: &quot;affiliate A&quot;,&#xd;
+&quot;sendingNode&quot;: &quot;manual&quot;,&#xd;
+&quot;requestID&quot;: &quot;4b92d491a27f4c17849f6693398d1e91&quot;,&#xd;
+&quot;timeStamp&quot;: &quot;&quot;&#xd;
+},&#xd;
+&quot;prescriptions&quot;: [&#xd;
+{&#xd;
+&quot;prescriptionId&quot;: &quot;${__UUID}&quot;,&#xd;
+&quot;practice&quot;: {&#xd;
+&quot;practiceId&quot;: &quot;2086015.practice-id@QB.web.rcopia.com&quot;,&#xd;
+&quot;practiceName&quot;: &quot;ChildCare&quot;&#xd;
+},&#xd;
+&quot;prescriber&quot;: {&#xd;
+&quot;prescriberId&quot;: &quot;AAA@@2086025.provider-id@QB.web.rcopia.com&quot;,&#xd;
+&quot;npi&quot;: &quot;1831120351&quot;,&#xd;
+&quot;firstName&quot;: &quot;Ana&quot;,&#xd;
+&quot;lastName&quot;: &quot;Herrero&quot;,&#xd;
+&quot;middleName&quot;: &quot;......&quot;,&#xd;
+&quot;suffix&quot;: &quot;DR&quot;,&#xd;
+&quot;prefix&quot;: &quot;MS.&quot;,&#xd;
+&quot;officePhoneNumber&quot;: &quot;(123) 123-1234&quot;,&#xd;
+&quot;faxNumber&quot;: &quot;(456) 789-3456&quot;,&#xd;
+&quot;dea&quot;: &quot;dea&quot;,&#xd;
+&quot;address&quot;: {&#xd;
+&quot;address1&quot;: &quot;1234, Phase 7&quot;,&#xd;
+&quot;address2&quot;: &quot;Sec 61&quot;,&#xd;
+&quot;city&quot;: &quot;Mohali&quot;,&#xd;
+&quot;stateCode&quot;: &quot;MD&quot;,&#xd;
+&quot;zipCode&quot;: &quot;12345&quot;&#xd;
+}&#xd;
+},&#xd;
+&quot;patient&quot;: {&#xd;
+&quot;patientId&quot;: &quot;85851115268913.patient-id@AA.web.rcopia.com&quot;,&#xd;
+&quot;firstName&quot;: &quot;bruce&quot;,&#xd;
+&quot;lastName&quot;: &quot;wilies&quot;,&#xd;
+&quot;dateOfBirth&quot;: &quot;19450303&quot;,&#xd;
+&quot;gender&quot;: &quot;F&quot;,&#xd;
+&quot;middleName&quot;: &quot;......&quot;,&#xd;
+&quot;suffix&quot;: &quot;DR&quot;,&#xd;
+&quot;prefix&quot;: &quot;MS.&quot;,&#xd;
+&quot;address&quot;: {&#xd;
+&quot;address1&quot;: &quot;1234, Phase 7&quot;,&#xd;
+&quot;address2&quot;: &quot;Sec 61&quot;,&#xd;
+&quot;city&quot;: &quot;Mohali&quot;,&#xd;
+&quot;stateCode&quot;: &quot;MD&quot;,&#xd;
+&quot;zipCode&quot;: &quot;78459&quot;&#xd;
+}&#xd;
+},&#xd;
+&quot;ndcId&quot;: &quot;124&quot;,&#xd;
+&quot;brandName&quot;: &quot;Cipro&quot;,&#xd;
+&quot;genericName&quot;: &quot;Ciprofloxacin&quot;,&#xd;
+&quot;duration&quot;: &quot;1&quot;,&#xd;
+&quot;dose&quot;: &quot;QQQ2&quot;,&#xd;
+&quot;doseUnit&quot;: &quot;tablets&quot;,&#xd;
+&quot;doseTiming&quot;: &quot;2.0&quot;,&#xd;
+&quot;refills&quot;: &quot;2&quot;,&#xd;
+&quot;stopDate&quot;: &quot;20170715&quot;,&#xd;
+&quot;writtenDate&quot;: &quot;20170710&quot;,&#xd;
+&quot;quantity&quot;: &quot;10&quot;,&#xd;
+&quot;quantityUnit&quot;: &quot;tablet&quot;&#xd;
+}&#xd;
+]&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">https://medhxservice.qa.drfirst.com/rest/sendPrescriptionHistory.do</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Bearer ${token}</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <com.atlantbh.jmeter.plugins.jsonutils.jsonformatter.JSONFormatter guiclass="com.atlantbh.jmeter.plugins.jsonutils.jsonformatter.gui.JSONFormatterGui" testclass="com.atlantbh.jmeter.plugins.jsonutils.jsonformatter.JSONFormatter" testname="jp@gc - JSON Format Post Processor" enabled="true"/>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="-1843932354"> &quot;message&quot;: &quot;Success&quot;</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">16</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="get_prescriptionHistory_HTTP Request" enabled="true">
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+&quot;requestInfo&quot;: {&#xd;
+&quot;partnerName&quot;: &quot;affiliate A&quot;,&#xd;
+&quot;sendingNode&quot;: &quot;manual&quot;,&#xd;
+&quot;requestID&quot;: &quot;4b92d491a27f4c17849f6693398d1e91&quot;&#xd;
+},&#xd;
+&quot;patient&quot;: {&#xd;
+&quot;patientId&quot;: &quot;85851115268913.patient-id@AA.web.rcopia.com&quot;,&#xd;
+&quot;firstName&quot;: &quot;bruce&quot;,&#xd;
+&quot;lastName&quot;: &quot;wilies&quot;,&#xd;
+&quot;dateOfBirth&quot;: &quot;19450303&quot;,&#xd;
+&quot;zipCode&quot;: &quot;78459&quot;&#xd;
+},&#xd;
+&quot;beginDate&quot;: &quot;20170710&quot;,&#xd;
+&quot;endDate&quot;: &quot;20170710&quot;,&#xd;
+&quot;affiliateId&quot;: &quot;c530e8908719478681352871f7f8ea84&quot;,&#xd;
+&quot;practiceId&quot;: &quot;2086015.practice-id@QB.web.rcopia.com&quot;&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+          <stringProp name="HTTPSampler.domain"></stringProp>
+          <stringProp name="HTTPSampler.port"></stringProp>
+          <stringProp name="HTTPSampler.connect_timeout"></stringProp>
+          <stringProp name="HTTPSampler.response_timeout"></stringProp>
+          <stringProp name="HTTPSampler.protocol">http</stringProp>
+          <stringProp name="HTTPSampler.contentEncoding"></stringProp>
+          <stringProp name="HTTPSampler.path">https://medhxservice.qa.drfirst.com/rest/getPrescriptionHistory.do</stringProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <boolProp name="HTTPSampler.auto_redirects">false</boolProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.DO_MULTIPART_POST">false</boolProp>
+          <stringProp name="HTTPSampler.implementation">HttpClient4</stringProp>
+          <boolProp name="HTTPSampler.monitor">false</boolProp>
+          <stringProp name="HTTPSampler.embedded_url_re"></stringProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header Manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Content-Type</stringProp>
+                <stringProp name="Header.value">application/json</stringProp>
+              </elementProp>
+              <elementProp name="" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Basic VGVzdFVzZXI6VGVzdDEyMzQ=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <com.atlantbh.jmeter.plugins.jsonutils.jsonformatter.JSONFormatter guiclass="com.atlantbh.jmeter.plugins.jsonutils.jsonformatter.gui.JSONFormatterGui" testclass="com.atlantbh.jmeter.plugins.jsonutils.jsonformatter.JSONFormatter" testname="jp@gc - JSON Format Post Processor" enabled="true"/>
+          <hashTree/>
+          <ResponseAssertion guiclass="AssertionGui" testclass="ResponseAssertion" testname="Response Assertion" enabled="true">
+            <collectionProp name="Asserion.test_strings">
+              <stringProp name="-794201143">&quot;patientId&quot;: &quot;85851115268913.patient-id@AA.web.rcopia.com&quot;</stringProp>
+            </collectionProp>
+            <stringProp name="Assertion.test_field">Assertion.response_data</stringProp>
+            <boolProp name="Assertion.assume_success">false</boolProp>
+            <intProp name="Assertion.test_type">16</intProp>
+          </ResponseAssertion>
+          <hashTree/>
+        </hashTree>
+      </hashTree>
+      <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree" enabled="true">
+        <boolProp name="ResultCollector.error_logging">false</boolProp>
+        <objProp>
+          <name>saveConfig</name>
+          <value class="SampleSaveConfiguration">
+            <time>true</time>
+            <latency>true</latency>
+            <timestamp>true</timestamp>
+            <success>true</success>
+            <label>true</label>
+            <code>true</code>
+            <message>false</message>
+            <threadName>true</threadName>
+            <dataType>false</dataType>
+            <encoding>false</encoding>
+            <assertions>false</assertions>
+            <subresults>false</subresults>
+            <responseData>false</responseData>
+            <samplerData>false</samplerData>
+            <xml>false</xml>
+            <fieldNames>true</fieldNames>
+            <responseHeaders>false</responseHeaders>
+            <requestHeaders>false</requestHeaders>
+            <responseDataOnError>false</responseDataOnError>
+            <saveAssertionResultsFailureMessage>false</saveAssertionResultsFailureMessage>
+            <assertionsResultsToSave>0</assertionsResultsToSave>
+            <bytes>true</bytes>
+            <hostname>true</hostname>
+            <threadCounts>true</threadCounts>
+            <sampleCount>true</sampleCount>
+            <connectTime>true</connectTime>
+          </value>
+        </objProp>
+        <stringProp name="filename"></stringProp>
+      </ResultCollector>
+      <hashTree/>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
