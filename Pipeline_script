@@ -1,4 +1,4 @@
 node {
   stage 'Run JMeter Test'
-  C:\jmeter\bin\jmeter.bat -Jjmeter.save.saveservice.output_format=json -Jjmeter.save.saveservice.response_data=true -n -t C:\jmeter\extras\pihmacs_qa.jmx -l Test.jtl
+  sh /tmp/apache-jmeter-3.1/bin/jmeter -Jjmeter.save.saveservice.output_format=xml -Jjmeter.save.saveservice.response_data=true -n -t /tmp/pihmacs_qa.jmx -l /tmp/pi_hmacs_log_copy.jtl
 }
