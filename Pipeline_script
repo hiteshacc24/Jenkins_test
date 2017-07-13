@@ -1,4 +1,4 @@
-#!groovy
+sh 'groovy ideainspect.groovy'
 node {
   stage 'Run JMeter Test'
   sh /tmp/apache-jmeter-3.1/bin/jmeter -n -t /tmp/pihmacs_qa.jmx -l /tmp/pi_hmacs_log_copy.jtl 
